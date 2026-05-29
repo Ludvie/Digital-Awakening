@@ -24,4 +24,3 @@ Proyek ini dibangun menggunakan perpaduan teknologi *web* dasar dan berbagai *to
 - **Sketchfab:** Penyediaan dan pencarian aset model 3D untuk elemen visual.
 - **Unity:** Penyesuaian, optimasi, dan pengaturan skala model 3D/aset AR sebelum diintegrasikan.
 - **Platform WebAR:** Digunakan sebagai *hosting environment* untuk menjalankan *Augmented Reality* langsung melalui *browser smartphone* pengguna tanpa perlu mengunduh aplikasi tambahan.
-- 
