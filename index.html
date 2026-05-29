@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Awakening - Guidebook UNIB</title>
+    <!-- Font Scrapbook: Fredoka (Bubbly), Caveat (Handwriting), Nunito (Readable) -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === COLOR PALETTE & VARIABLES === */
+        :root {
+            --bg-1: #FFD1D1; /* Soft Pink */
+            --bg-2: #FFF5E4; /* Pastel Cream */
+            --bg-3: #FFDAC1; /* Peach */
+            --bg-4: #E2F0CB; /* Pastel Green */
+            --bg-5: #F0D9FF; /* Pastel Purple */
+            
+            --text-color: #5A4A5A;
+            --pink-accent: #E56B8D;
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* === ANIMATED GRADIENT BACKGROUND === */
+        body {
+            background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-4), var(--bg-5));
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* === LAYER DEKORASI BACKGROUND === */
+        .bg-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .bg-decor { position: absolute; opacity: 0.5; }
+        
+        .deco-1 { width: 120px; height: 120px; border: 4px dashed #FFF; border-radius: 50%; top: 5%; left: 8%; animation: spin 25s linear infinite; }
+        .deco-2 { width: 90px; height: 90px; background: rgba(255,255,255,0.3); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); bottom: 12%; right: 5%; animation: floatTitle 6s ease-in-out infinite; }
+        .deco-3 { width: 70px; height: 70px; border: 6px solid rgba(255,255,255,0.5); border-radius: 18px; bottom: 35%; left: 10%; transform: rotate(-20deg); animation: spin 15s linear infinite reverse; }
+        .deco-4 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, transparent 10%); background-size: 20px 20px; top: -40px; right: -40px; border-radius: 50%; animation: spin 40s linear infinite; }
+        .deco-5 { width: 150px; height: 15px; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6) 10px, transparent 10px, transparent 20px); top: 30%; right: 15%; transform: rotate(45deg); }
+        .deco-6 { width: 300px; height: 300px; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); border-radius: 50%; bottom: -80px; right: 25%; animation: floatTitle 10s ease-in-out infinite reverse; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* === SCRAPBOOK NOTEBOOK CONTAINER === */
+        .app-container {
+            width: 100%;
+            max-width: 550px;
+            background-color: #FFFAFA; 
+            background-image: 
+                linear-gradient(90deg, transparent 50px, rgba(255, 183, 178, 0.8) 50px, rgba(255, 183, 178, 0.8) 52px, transparent 52px), 
+                linear-gradient(rgba(199, 206, 234, 0.5) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 30px;
+            padding: 50px 40px 40px 75px; 
+            margin: 20px;
+            border-radius: 5px 20px 20px 5px;
+            box-shadow: 15px 20px 40px rgba(0,0,0,0.1), inset -5px 0 15px rgba(0,0,0,0.02);
+            position: relative;
+            z-index: 10;
+        }
+
+        .binding-holes {
+            position: absolute;
+            left: 15px; top: 30px; bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .hole {
+            width: 16px; height: 16px;
+            background-color: rgba(0,0,0,0.15); 
+            border-radius: 50%;
+            box-shadow: inset 2px 3px 5px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,1);
+        }
+
+        .sticker {
+            position: absolute;
+            filter: drop-shadow(2px 4px 2px rgba(0,0,0,0.1));
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        /* === TYPOGRAPHY === */
+        h1, h2, h3 { font-family: 'Fredoka', sans-serif; color: var(--pink-accent); text-align: center; letter-spacing: 1px; margin-bottom: 10px; }
+        p { font-size: 16px; line-height: 30px; text-align: center; margin-bottom: 20px; }
+        .handwriting { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #795C7A; line-height: 1.2; }
+
+        /* === GLASSMORPHISM BUTTONS === */
+        .btn.glass {
+            display: block; margin: 25px auto 10px auto; background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 2px solid var(--glass-border); color: #D65A7C; font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 500;
+            padding: 12px 30px; border-radius: 50px; cursor: pointer; box-shadow: 0 8px 32px 0 rgba(229, 107, 141, 0.2), inset 0 0 10px rgba(255,255,255,0.5);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); text-transform: uppercase;
+        }
+        .btn.glass:hover {
+            background: rgba(255, 255, 255, 0.65); transform: translateY(-5px) scale(1.05); box-shadow: 0 12px 40px 0 rgba(229, 107, 141, 0.4), inset 0 0 15px rgba(255,255,255,0.8); color: #A84965;
+        }
+
+        /* === SPA TABS === */
+        .tab-content { display: none; animation: scrapbookFadeIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .tab-content.active { display: block; }
+        @keyframes scrapbookFadeIn { 0% { opacity: 0; transform: translateY(30px) rotate(3deg) scale(0.95); } 100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); } }
+
+        /* === LANDING PAGE === */
+        .landing-title { font-size: 3.2rem; line-height: 1.1; text-shadow: 3px 3px 0px #FFF, 6px 6px 15px rgba(229, 107, 141, 0.4); animation: floatTitle 4s ease-in-out infinite; margin: 20px 0; }
+        @keyframes floatTitle { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
+
+        /* === POLAROID CARDS & IMAGES === */
+        .polaroid-card {
+            background: #FFF; padding: 12px 12px 35px 12px; box-shadow: 3px 6px 20px rgba(0,0,0,0.08); border-radius: 2px; margin: 20px auto; position: relative; border: 1px solid #EEE;
+        }
+        .polaroid-card::before {
+            content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-4deg); width: 90px; height: 28px; background: rgba(255, 218, 193, 0.85); backdrop-filter: blur(2px); clip-path: polygon(4% 0%, 96% 0%, 100% 95%, 0% 100%); z-index: 5;
+        }
+        .polaroid-card p { margin: 10px 0 0 0; line-height: 1; }
+
+        /* Style untuk Tag Gambar Asli (<img src="...">) */
+        .img-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            background-color: #FFF5E4; /* Warna cadangan jika gambar belum di load */
+            border: 1px solid #F0F0F0;
+            display: block;
+        }
+        
+        /* Style Khusus Gambar Target AR Rasio 4:5 */
+        .img-ratio-4-5 {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            background-color: #E2F0CB; /* Warna cadangan jika gambar belum di load */
+            border: 1px solid #F0F0F0;
+            display: block;
+        }
+
+        .glass-badge {
+            background: var(--glass-bg); backdrop-filter: blur(5px); border: 1px solid var(--glass-border); color: var(--pink-accent); padding: 5px 20px; border-radius: 20px; font-family: 'Fredoka', sans-serif; font-size: 0.95rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: block; width: fit-content; margin: 0 auto 15px auto;
+        }
+
+        /* === LAB GRID SCRAPBOOK === */
+        .lab-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+        .lab-card { background: #FFF; padding: 15px; width: 140px; box-shadow: 2px 4px 15px rgba(0,0,0,0.06); cursor: pointer; position: relative; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #F5F5F5; }
+        .lab-card:nth-child(1) { transform: rotate(-3deg); } .lab-card:nth-child(2) { transform: rotate(2deg); } .lab-card:nth-child(3) { transform: rotate(-1deg); } .lab-card:nth-child(4) { transform: rotate(4deg); } .lab-card:nth-child(5) { transform: rotate(-2deg); }
+        .lab-card:hover { transform: scale(1.1) rotate(0deg); z-index: 10; box-shadow: 5px 15px 25px rgba(229, 107, 141, 0.2); }
+        .lab-card::after { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(2deg); width: 50px; height: 18px; background: rgba(181, 234, 215, 0.8); clip-path: polygon(0 10%, 100% 0, 95% 90%, 5% 100%); }
+        .lab-card:nth-child(even)::after { background: rgba(255, 218, 193, 0.8); transform: translateX(-50%) rotate(-3deg); }
+        .lab-icon { background: rgba(240, 217, 255, 0.4); border-radius: 50%; display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; margin: 0 auto 10px auto; }
+        .lab-card h4 { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #795C7A; margin: 0; line-height: 1; }
+
+        /* === MODAL POP-UP === */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 209, 209, 0.3); backdrop-filter: blur(8px); z-index: 100; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-content { background-color: #FFFAFA; background-image: linear-gradient(90deg, transparent 30px, rgba(255, 183, 178, 0.5) 30px, rgba(255, 183, 178, 0.5) 32px, transparent 32px), linear-gradient(rgba(199, 206, 234, 0.4) 1px, transparent 1px); background-size: 100% 100%, 100% 25px; padding: 40px 20px 30px 40px; border-radius: 5px 15px 15px 5px; max-width: 350px; width: 90%; text-align: center; box-shadow: 10px 15px 40px rgba(0,0,0,0.15); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .modal-overlay.show .modal-content { transform: scale(1) rotate(-1deg); }
+        .modal-content p { line-height: 25px; font-family: 'Caveat', cursive; font-size: 1.5rem; color: #5A4A5A; margin-bottom: 0; }
+
+        /* === CONFETTI === */
+        #magic-particles { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 50; }
+        .particle { position: absolute; top: -50px; animation: fallAnimation linear forwards; }
+        @keyframes fallAnimation { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 500px) {
+            .app-container { padding: 40px 25px 40px 55px; background-image: linear-gradient(90deg, transparent 35px, rgba(255, 183, 178, 0.8) 35px, rgba(255, 183, 178, 0.8) 37px, transparent 37px), linear-gradient(rgba(199, 206, 234, 0.5) 1px, transparent 1px); }
+            .binding-holes { left: 8px; }
+            .landing-title { font-size: 2.6rem; }
+            .lab-card { width: calc(50% - 15px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Layer Background Shape CSS -->
+    <div class="bg-layer">
+        <div class="bg-decor deco-1"></div>
+        <div class="bg-decor deco-2"></div>
+        <div class="bg-decor deco-3"></div>
+        <div class="bg-decor deco-4"></div>
+        <div class="bg-decor deco-5"></div>
+        <div class="bg-decor deco-6"></div>
+    </div>
+
+    <!-- Container Konfeti CSS Murni -->
+    <div id="magic-particles"></div>
+
+    <div class="app-container">
+        <div class="binding-holes">
+            <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+            <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+            <div class="hole"></div><div class="hole"></div>
+        </div>
+
+        <svg class="sticker" style="top: -20px; right: -15px; transform: rotate(15deg);" width="50" height="50" viewBox="0 0 24 24" fill="#FFB7B2" stroke="#FFF" stroke-width="2"><path d="M12 12c-4-4-8-2-8 4s4 8 8 4 8-2 8-8-4-8-8 4z"></path><path d="M12 12c-4 4-8 2-8-4s4-8 8-4 8 2 8 8-4 8-8-4z"></path></svg>
+        <svg class="sticker" style="bottom: -15px; left: 40%; transform: rotate(-10deg);" width="45" height="45" viewBox="0 0 24 24" fill="#FFF5E4" stroke="#FFDAC1" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+
+        <!-- ================= LANDING PAGE ================= -->
+        <div id="landing" class="tab-content active">
+            <div style="text-align: center; margin-top: 10px;">
+                <p class="handwriting" style="margin-bottom: 0;">Selamat Datang di Dunia...</p>
+                <h1 class="landing-title">DIGITAL<br>AWAKENING</h1>
+                
+                <div class="polaroid-card" style="transform: rotate(3deg); width: 220px;">
+                    <!-- ⬇️ GANTI "src" DENGAN LOKASI GAMBAR LANDING DARI FOLDER KAMU ⬇️ -->
+                    <img class="img-placeholder" src="HOME.jpg" alt="[ Gambar Bebas / Logo ]">
+                    <p class="handwriting">Informatika UNIB</p>
+                </div>
+
+                <button class="btn glass" onclick="navigateTo('page1')">Mulai Petualangan</button>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 1: BERANDA ================= -->
+        <div id="page1" class="tab-content">
+            <span class="glass-badge">Akreditasi A BAN-PT</span>
+            <h2>Halo, Mahasiswa Baru!</h2>
+            
+            <p>Selamat datang di keluarga besar Informatika Universitas Bengkulu Fakultas Teknik!</p>
+            <p>Kamu telah menjadi bagian dari prodi unggulan yang siap mencetak lulusan inovatif di bidang teknologi.</p>
+            
+            <button class="btn glass" onclick="navigateTo('page2')">Lanjut Eksplorasi</button>
+        </div>
+
+
+        <!-- ================= HALAMAN 2: FASILITAS & LAB ================= -->
+        <div id="page2" class="tab-content">
+            <h2>Laboratorium Kita</h2>
+            <p>Kita memiliki 5 laboratorium keren untuk mengasah kemampuan teknologimu! (Klik catatannya)</p>
+            
+            <div class="lab-grid">
+                <div class="lab-card" onclick="openModal('Lab Pemrograman', 'Tempat belajar coding dari dasar hingga mahir. Logika algoritmamu dilatih di sini.')">
+                    <div class="lab-icon"><svg viewBox="0 0 24 24" width="28" height="28" stroke="#795C7A" stroke-width="2" fill="none"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                    <h4>Pemrograman</h4>
+                </div>
+                <div class="lab-card" onclick="openModal('Lab Jaringan', 'Penasaran dengan infrastruktur internet? Di sini tempat bereksperimen dengan router dan server.')">
+                    <div class="lab-icon"><svg viewBox="0 0 24 24" width="28" height="28" stroke="#795C7A" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                    <h4>Jaringan</h4>
+                </div>
+                <div class="lab-card" onclick="openModal('Lab Cerdas', 'Mari meneliti Artificial Intelligence dan Machine Learning. Masa depan diprogram di sini.')">
+                    <div class="lab-icon"><svg viewBox="0 0 24 24" width="28" height="28" stroke="#795C7A" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg></div>
+                    <h4>Lab Cerdas</h4>
+                </div>
+                <div class="lab-card" onclick="openModal('Lab Pengolahan Citra', 'Membuat komputer mampu melihat dan menganalisa objek visual serta mendeteksi wajah.')">
+                    <div class="lab-icon"><svg viewBox="0 0 24 24" width="28" height="28" stroke="#795C7A" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                    <h4>Pengolahan Citra</h4>
+                </div>
+                <div class="lab-card" onclick="openModal('Lab Multimedia', 'Fasilitas untuk pembuatan animasi 3D, pengembangan game, dan desain UI UX.')">
+                    <div class="lab-icon"><svg viewBox="0 0 24 24" width="28" height="28" stroke="#795C7A" stroke-width="2" fill="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                    <h4>Multimedia</h4>
+                </div>
+            </div>
+
+            <button class="btn glass" onclick="navigateTo('page3')">Lihat Organisasi</button>
+        </div>
+
+
+        <!-- ================= HALAMAN 3: ORGANISASI & WEBAR ================= -->
+        <div id="page3" class="tab-content">
+            <h2>HIMATIF & WebAR</h2>
+            <p>Perkuliahan bukan hanya tentang logika. Bergabunglah dengan HIMATIF UNIB untuk membangun relasi dan keterampilan sosial yang kuat.</p>
+            
+            <div class="polaroid-card" style="transform: rotate(-4deg); width: 220px;">
+                <!-- ⬇️ GANTI "src" DENGAN LOKASI GAMBAR QR CODE DARI FOLDER KAMU ⬇️ -->
+                <img class="img-placeholder" src="QR.png" alt="[ Gambar QR Code ]">
+                <p class="handwriting">Scan QR Code Ini</p>
+            </div>
+            <p style="font-size: 14px;">Langkah Pertama: Scan QR di atas menggunakan kamera perangkatmu.</p>
+            
+            <button class="btn glass" onclick="navigateTo('page4')">Buka Target Gambar</button>
+        </div>
+
+
+        <!-- ================= HALAMAN 4: KEAJAIBAN AR ================= -->
+        <div id="page4" class="tab-content">
+            <h2>Keajaiban Dimulai</h2>
+            <p>Langkah Kedua: Arahkan kamera WebAR milikmu ke gambar penanda di bawah ini!</p>
+            
+            <div class="polaroid-card" style="transform: rotate(2deg); width: 280px;">
+                <!-- ⬇️ GANTI "src" DENGAN GAMBAR TARGET AR (Akan ter-kunci di rasio 4:5 otomatis) ⬇️ -->
+                <img class="img-ratio-4-5" src="Trigger.png" alt="[ Gambar Target AR (4:5) ]">
+                <p class="handwriting">Gambar Penanda AR</p>
+            </div>
+            
+            <button class="btn glass" onclick="navigateTo('page1')">Kembali ke Awal</button>
+        </div>
+
+    </div>
+
+    <!-- ================= MODAL OVERLAY ================= -->
+    <div class="modal-overlay" id="labModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3 id="modalTitle">Judul Lab</h3>
+            <p id="modalDesc">Deskripsi lab akan muncul di sini.</p>
+            <button class="btn glass" style="margin-top:20px; font-size:1rem; padding: 8px 30px;" onclick="forceCloseModal()">Tutup</button>
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        function navigateTo(targetPageId) {
+            const pages = document.querySelectorAll('.tab-content');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const targetPage = document.getElementById(targetPageId);
+            if (targetPage) targetPage.classList.add('active');
+
+            if (targetPageId === 'page4') {
+                startMagicParticles();
+            } else {
+                stopMagicParticles();
+            }
+        }
+
+        const modal = document.getElementById('labModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+
+        function openModal(title, desc) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modal.classList.add('show');
+        }
+
+        function closeModal(event) {
+            if (event.target === modal) modal.classList.remove('show');
+        }
+
+        function forceCloseModal() {
+            modal.classList.remove('show');
+        }
+
+        /* --- SCRIPT KONFETI MENGGUNAKAN CSS SHAPES --- */
+        let particleInterval;
+        const particleContainer = document.getElementById('magic-particles');
+
+        function startMagicParticles() {
+            particleInterval = setInterval(createParticle, 200);
+        }
+
+        function stopMagicParticles() {
+            clearInterval(particleInterval);
+            particleContainer.innerHTML = ''; 
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const shapes = ['circle', 'square', 'rect'];
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const colors = ['#FFD1D1', '#FFF5E4', '#FFDAC1', '#E2F0CB', '#F0D9FF'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = Math.random() * 12 + 10;
+            
+            particle.style.backgroundColor = color;
+            if(shape === 'rect') { particle.style.width = (size * 1.5) + 'px'; particle.style.height = size + 'px'; } 
+            else { particle.style.width = size + 'px'; particle.style.height = size + 'px'; }
+            if(shape === 'circle') particle.style.borderRadius = '50%';
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particleContainer.appendChild(particle);
+
+            setTimeout(() => { particle.remove(); }, 6000);
+        }
+    </script>
+</body>
+</html>
